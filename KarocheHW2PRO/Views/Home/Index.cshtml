@@ -9,9 +9,12 @@
     <div class="form-group">
         <label for="FirstCourse">First Course</label>
         <select class="form-control" id="FirstCourse" name="SelectedFirstCourse">
-            @foreach (var item in Model.FirstCourse)
+            @if (Model.FirstCourse != null)
             {
-                <option value="@item.Name">@item.Name - @item.Price$</option>
+                @foreach (var item in Model.FirstCourse)
+                {
+                    <option value="@item.Name">@item.Name - @item.Price$</option>
+                }
             }
         </select>
     </div>
@@ -19,9 +22,12 @@
     <div class="form-group">
         <label for="SecondCourse">Second Course</label>
         <select class="form-control" id="SecondCourse" name="SelectedSecondCourse">
-            @foreach (var item in Model.SecondCourse)
+            @if (Model.SecondCourse != null)
             {
-                <option value="@item.Name">@item.Name - @item.Price$</option>
+                @foreach (var item in Model.SecondCourse)
+                {
+                    <option value="@item.Name">@item.Name - @item.Price$</option>
+                }
             }
         </select>
     </div>
@@ -29,9 +35,12 @@
     <div class="form-group">
         <label for="Drink">Drink</label>
         <select class="form-control" id="Drink" name="SelectedDrink">
-            @foreach (var item in Model.Drink)
+            @if (Model.Drink != null)
             {
-                <option value="@item.Name">@item.Name - @item.Price$</option>
+                @foreach (var item in Model.Drink)
+                {
+                    <option value="@item.Name">@item.Name - @item.Price$</option>
+                }
             }
         </select>
     </div>
