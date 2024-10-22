@@ -1,0 +1,52 @@
+﻿@model KarocheHW2PRO.Models.OrderViewModel;
+@{
+    ViewData["Title"] = "Make an Order";
+}
+
+<h2>Make an Order</h2>
+
+<form method="post" asp-action="Calculate">
+    <div class="form-group">
+        <label for="FirstCourse">First Course</label>
+        <select class="form-control" id="FirstCourse" name="SelectedFirstCourse">
+            @foreach (var item in Model.FirstCourse)
+            {
+                <option value="@item.Name">@item.Name - @item.Price$</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="SecondCourse">Second Course</label>
+        <select class="form-control" id="SecondCourse" name="SelectedSecondCourse">
+            @foreach (var item in Model.SecondCourse)
+            {
+                <option value="@item.Name">@item.Name - @item.Price$</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Drink">Drink</label>
+        <select class="form-control" id="Drink" name="SelectedDrink">
+            @foreach (var item in Model.Drink)
+            {
+                <option value="@item.Name">@item.Name - @item.Price$</option>
+            }
+        </select>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Calculate</button>
+</form>
+
+@if (Model.TotalPrice > 0)
+{
+    <h3>Your Order:</h3>
+    <ul>
+        <li>First Course: @Model.SelectedFirstCourse</li>
+        <li>Second Course: @Model.SelectedSecondCourse</li>
+        <li>Drink: @Model.SelectedDrink</li>
+    </ul>
+    <h4>Total Price: @Model.TotalPrice$</h4>
+}
