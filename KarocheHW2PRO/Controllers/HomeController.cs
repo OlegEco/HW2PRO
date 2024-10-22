@@ -16,24 +16,10 @@ namespace KarocheHW2PRO.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new OrderViewModel
-            {
-                FirstCourse = new List<MenuItem>
-                {
-                    new MenuItem { Name = "GreenSoup", Price = 2.5 },
-                    new MenuItem { Name = "Borshch", Price = 3.25 }
-                },
-                SecondCourse = new List<MenuItem>
-                {
-                    new MenuItem {Name = "Potate", Price = 1.75 },
-                    new MenuItem {Name = "Fisch", Price = 4.15 }
-                },
-                Drink = new List<MenuItem>
-                {
-                    new MenuItem {Name = "Coffee", Price = 1.5 },
-                    new MenuItem {Name = "Tea", Price = 3.45 }
-                }
-            };
+            var model = new OrderViewModel();
+
+            InitializeMenu(model);
+
             return View(model);
         }
 
@@ -54,6 +40,24 @@ namespace KarocheHW2PRO.Controllers
                              + (prices.ContainsKey(order.SelectedSecondCourse) ? prices[order.SelectedSecondCourse] : 0)
                              + (prices.ContainsKey(order.SelectedDrink) ? prices[order.SelectedDrink] : 0);
 
+            InitializeMenu(order);
+
+            return View("Index", order);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private OrderViewModel InitializeMenu(OrderViewModel order)
+        {
             order.FirstCourse = new List<MenuItem>
             {
                 new MenuItem { Name = "GreenSoup", Price = 2.5 },
@@ -70,18 +74,7 @@ namespace KarocheHW2PRO.Controllers
                 new MenuItem {Name = "Tea", Price = 3.45 }
             };
 
-            return View("Index", order);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return order;
         }
     }
 }
